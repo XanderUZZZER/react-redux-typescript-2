@@ -4,7 +4,7 @@ interface TodoFormProps {
   onAdd(title: string): void
 }
 
-const TodoForm: React.FC<TodoFormProps> = (props) => {
+const TodoForm: React.FC<TodoFormProps> = props => {
   const [title, setTitle] = useState<string>('')
 
   const changeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -12,7 +12,7 @@ const TodoForm: React.FC<TodoFormProps> = (props) => {
   }
 
   const keyPressHandler = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && title !== '') {
       props.onAdd(title)
       setTitle('')
     }
