@@ -10,7 +10,7 @@ interface TodoListProps {
 const TodoList: React.FC<TodoListProps> = ({ todos, onRemove, onToggle }) => {
   return (
     <ul>
-      {todos.map((todo) => {
+      {todos.map(todo => {
         const classes = ['todo']
         if (todo.completed) {
           classes.push('completed')
