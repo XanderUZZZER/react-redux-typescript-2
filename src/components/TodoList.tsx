@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { ITodo } from '../interfaces'
 
 interface TodoListProps {
@@ -8,6 +8,16 @@ interface TodoListProps {
 }
 
 const TodoList: React.FC<TodoListProps> = ({ todos, onRemove, onToggle }) => {
+  useEffect(() => {
+    console.log('Effect in list, state received through props')
+    console.log(todos)
+
+    return () => {
+      console.log('clean out in list, state before cleaning')
+      console.log(todos)
+    }
+  }, [todos])
+
   if (todos.length === 0) {
     return <p className='center'>There is no todos, add some</p>
   }

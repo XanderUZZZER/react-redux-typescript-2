@@ -12,11 +12,17 @@ const TodosPage: React.FC = () => {
     const savedTodos = JSON.parse(
       localStorage.getItem('todos') || '[]'
     ) as ITodo[]
+
     setTodos(savedTodos)
+    console.log('UseEffect 1, state loaded from storage')
+    console.log(savedTodos)
   }, [])
 
   useEffect(() => {
     localStorage.setItem('todos', JSON.stringify(todos))
+
+    console.log('UseEffect 2, state changed, added to storage')
+    console.log(todos)
   }, [todos])
 
   const addHandler = (title: string) => {
