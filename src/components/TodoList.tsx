@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { ITodo } from '../interfaces'
+import { ITodo } from '../types/interfaces'
 
 interface TodoListProps {
   todos: ITodo[]
@@ -9,12 +9,18 @@ interface TodoListProps {
 
 const TodoList: React.FC<TodoListProps> = ({ todos, onRemove, onToggle }) => {
   useEffect(() => {
-    console.log('Effect in list, state received through props')
-    console.log(todos)
+    console.log(
+      'useEffect in child, depends on todos, state received through props'
+    )
+    todos.map(todo =>
+      console.log(`id: ${todo.id}\t completed: ${todo.completed}`)
+    )
 
     return () => {
-      console.log('clean out in list, state before cleaning')
-      console.log(todos)
+      console.log('clean up in child, state before cleaning')
+      todos.map(todo =>
+        console.log(`id: ${todo.id}\t completed: ${todo.completed}`)
+      )
     }
   }, [todos])
 
@@ -26,7 +32,7 @@ const TodoList: React.FC<TodoListProps> = ({ todos, onRemove, onToggle }) => {
     event.preventDefault()
     onRemove(id)
   }
-
+  console.log('TodosList render')
   return (
     <ul>
       {todos.map(todo => {
