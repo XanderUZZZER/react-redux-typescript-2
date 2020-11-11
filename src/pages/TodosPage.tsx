@@ -62,22 +62,24 @@ const TodosPage: React.FC = () => {
   }
 
   const toggleHandler = (id: number): void => {
-    // setTodos((prev) =>
-    //   prev.map((todo) => {
-    //     if (todo.id === id) {
-    //       return { ...todo, completed: !todo.completed };
-    //     }
-    //     return todo;
-    //   })
-    // );
-    setTodos(
-      todos.map(todo => {
+    setTodos(prev =>
+      prev.map(todo => {
         if (todo.id === id) {
-          todo.completed = !todo.completed
+          return { ...todo, completed: !todo.completed }
         }
         return todo
       })
     )
+  }
+
+  const showCompleted = () => {
+    console.log('competed')
+    setTodos(prev => prev.filter(todo => todo.completed !== false))
+  }
+
+  const showAll = () => {
+    console.log('competed')
+    setTodos(JSON.parse(localStorage.getItem('todos') || '[]') as ITodo[])
   }
 
   console.log('TodosPage render')
@@ -89,6 +91,18 @@ const TodosPage: React.FC = () => {
         onRemove={removeHandler}
         onToggle={toggleHandler}
       />
+      <button
+        className='waves-effect waves-light btn'
+        onClick={() => showCompleted()}
+      >
+        Show completed
+      </button>
+      <button
+        className='waves-effect waves-light btn'
+        onClick={() => showAll()}
+      >
+        Show all
+      </button>
     </>
   )
 }
