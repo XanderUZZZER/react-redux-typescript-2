@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import TodoForm from '../components/TodoForm'
 import TodoList from '../components/TodoList'
+import { RootState } from '../reducers'
 import { ITodo } from '../types/interfaces'
 
 declare var confirm: (question: string) => boolean
 
 const TodosPage: React.FC = () => {
-  const [todos, setTodos] = useState<ITodo[]>([])
+  const [todosm, setTodos] = useState<ITodo[]>([])
+  const todos = useSelector<RootState>(state => state.todos)
 
   useEffect(() => {
     let savedTodos = JSON.parse(
@@ -83,28 +86,7 @@ const TodosPage: React.FC = () => {
   }
 
   console.log('TodosPage render')
-  return (
-    <>
-      <TodoForm onAdd={addHandler} />
-      <TodoList
-        todos={todos}
-        onRemove={removeHandler}
-        onToggle={toggleHandler}
-      />
-      <button
-        className='waves-effect waves-light btn'
-        onClick={() => showCompleted()}
-      >
-        Show completed
-      </button>
-      <button
-        className='waves-effect waves-light btn'
-        onClick={() => showAll()}
-      >
-        Show all
-      </button>
-    </>
-  )
+  return <></>
 }
 
 export default TodosPage
